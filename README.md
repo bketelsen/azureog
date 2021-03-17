@@ -33,7 +33,7 @@ Usage of ./dist/azureog:
 
 ## Azure Functions
 
-I followed this handy [reference](https://docs.microsoft.com/azure/azure-functions/create-first-function-vs-code-other) to build a Go app as a custom Azure Function deployed on the Linux Consumption plan. Costs should be trivial.
+I followed this handy [reference](https://docs.microsoft.com/azure/azure-functions/create-first-function-vs-code-other?WT.mc_id=opensource-20963-brketels) to build a Go app as a custom Azure Function deployed on the Linux Consumption plan. Costs should be trivial.
 
 ## Make it yours!
 
