@@ -1,3 +1,3 @@
 FROM scratch
-COPY example /usr/bin/example
-ENTRYPOINT ["/usr/bin/example"]
+COPY azureog /usr/bin/azureog
+ENTRYPOINT ["/usr/bin/azureog"]
