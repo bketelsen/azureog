@@ -1,0 +1,92 @@
+project_name: azureog
+
+before:
+  hooks:
+    - go mod tidy
+
+
+builds:
+  - main: ./cmd/azureog
+    binary: azureog
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - GO111MODULE=on
+      - MACOSX_DEPLOYMENT_TARGET=10.1
+dockers:
+  - image_templates:
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-amd64"
+    ids:
+      - azureog
+    use_buildx: true
+    build_flag_templates:
+      - --platform=linux/amd64
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/bketelsen/azureog
+      - --label=org.opencontainers.image.source=https://github.com/bketelsen/azureog
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses=MIT
+  - image_templates:
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-arm64"
+    ids:
+      - azureog
+    use_buildx: true
+    build_flag_templates:
+      - --platform=linux/arm64
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/bketelsen/azureog
+      - --label=org.opencontainers.image.source=https://github.com/bketelsen/azureog
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses=MIT
+
+
+docker_manifests:
+  - name_template: "ghcr.io/bketelsen/azureog:latest"
+    image_templates:
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-amd64"
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-arm64"
+
+  - name_template: "ghcr.io/bketelsen/azureog:{{ .Tag }}"
+    image_templates:
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-amd64"
+      - "ghcr.io/bketelsen/azureog:{{ .Tag }}-arm64"
+
+changelog:
+  filters:
+    exclude:
+      - Merge
+archives:
+- replacements:
+    darwin: Darwin
+    linux: Linux
+    windows: Windows
+    386: i386
+    amd64: x86_64
+  format_overrides:
+    - goos: windows
+      format: zip
+  files:
+    - README.md
+    - LICENSE
+
+
+nfpms:
+- maintainer: Brian Ketelsen <bketelsen@gmail.com>
+  description: Generate OG Images
+  homepage: https://github.com/bketelsen/azureog
+  license: MIT
+  formats:
+  - deb
+  - rpm
+  - apk

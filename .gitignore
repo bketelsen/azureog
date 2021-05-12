@@ -7,3 +7,11 @@ local.settings.json
 /handler
 dist/azureog
 dist/handler
+*.rpm
+*.deb
+!dummy.deb
+*.apk
+coverage.txt
+dist
+.DS_Store
+.envrc
