@@ -49,3 +49,4 @@ GPL v3
 Inspired by, and much code from [DevQuotesPrinter](https://github.com/JosemyDuarte/DevsQuotesPrinter) - GPL v3 Licensed.
 
 ## Github Action
+There is a github action available.
