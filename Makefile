@@ -11,6 +11,9 @@ build-cli:
 		./cmd/azureog && \
 		chmod +x ./dist/azureog
 
+install: build-cli
+	cp -r ./dist/azureog ~/bin/azureog
+
 build-local-func:
 	go build \
 		-trimpath \
